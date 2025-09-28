@@ -11,8 +11,6 @@ import {
   Zap,
   AlertTriangle,
   Shield,
-  Radio,
-  Bell,
 } from "lucide-react";
 
 const RenderDashboard = ({ addNotification }) => {
@@ -26,18 +24,6 @@ const RenderDashboard = ({ addNotification }) => {
     sScale: 0,
     gScale: 2,
   });
-  const [subscriptionForm, setSubscriptionForm] = useState({
-    email: "",
-    phone: "",
-    threshold: 6,
-    showForm: false,
-  });
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    addNotification("Alert subscription activated successfully!", "success");
-    setSubscriptionForm((prev) => ({ ...prev, showForm: false }));
-  };
 
   const AlertsPanel = () => (
     <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
@@ -46,18 +32,6 @@ const RenderDashboard = ({ addNotification }) => {
           <AlertTriangle className="w-6 h-6 mr-2 text-yellow-400" />
           Active Alerts
         </h3>
-        <button
-          onClick={() =>
-            setSubscriptionForm((prev) => ({
-              ...prev,
-              showForm: !prev.showForm,
-            }))
-          }
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center"
-        >
-          <Bell className="w-4 h-4 mr-2" />
-          Subscribe
-        </button>
       </div>
 
       <div className="space-y-3">
@@ -95,120 +69,24 @@ const RenderDashboard = ({ addNotification }) => {
           </div>
         )}
 
-        {currentMetrics.rScale >= 2 && (
-          <div className="bg-purple-500/20 border border-purple-500/30 rounded-lg p-4">
-            <div className="flex items-center">
-              <Radio className="w-5 h-5 text-purple-400 mr-3" />
-              <div>
-                <div className="text-purple-400 font-medium">
-                  Radio Blackout
-                </div>
-                <div className="text-purple-300 text-sm">
-                  R{currentMetrics.rScale} - HF radio communications affected
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
         {currentMetrics.gScale < 2 &&
-          currentMetrics.kpIndex < 5 &&
-          currentMetrics.rScale < 2 && (
-            <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-4">
-              <div className="flex items-center">
-                <Shield className="w-5 h-5 text-green-400 mr-3" />
-                <div>
-                  <div className="text-green-400 font-medium">
-                    Conditions Normal
-                  </div>
-                  <div className="text-green-300 text-sm">
-                    All space weather parameters within normal ranges
+          currentMetrics.kpIndex <
+            5(
+              <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-4">
+                <div className="flex items-center">
+                  <Shield className="w-5 h-5 text-green-400 mr-3" />
+                  <div>
+                    <div className="text-green-400 font-medium">
+                      Conditions Normal
+                    </div>
+                    <div className="text-green-300 text-sm">
+                      All space weather parameters within normal ranges
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
       </div>
-
-      {subscriptionForm.showForm && (
-        <div className="mt-6 border-t border-gray-700 pt-6">
-          <form onSubmit={handleSubscribe} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Email Address
-              </label>
-              <input
-                type="email"
-                required
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                value={subscriptionForm.email}
-                onChange={(e) =>
-                  setSubscriptionForm((prev) => ({
-                    ...prev,
-                    email: e.target.value,
-                  }))
-                }
-                placeholder="your@email.com"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Phone (Optional)
-              </label>
-              <input
-                type="tel"
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                value={subscriptionForm.phone}
-                onChange={(e) =>
-                  setSubscriptionForm((prev) => ({
-                    ...prev,
-                    phone: e.target.value,
-                  }))
-                }
-                placeholder="+1 (555) 123-4567"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Alert Threshold (Kp ≥)
-              </label>
-              <select
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                value={subscriptionForm.threshold}
-                onChange={(e) =>
-                  setSubscriptionForm((prev) => ({
-                    ...prev,
-                    threshold: parseInt(e.target.value),
-                  }))
-                }
-              >
-                {[4, 5, 6, 7, 8, 9].map((val) => (
-                  <option key={val} value={val}>
-                    Kp {val}+
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex space-x-3">
-              <button
-                type="submit"
-                className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg font-medium transition-colors"
-              >
-                Subscribe
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  setSubscriptionForm((prev) => ({ ...prev, showForm: false }))
-                }
-                className="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-2 rounded-lg font-medium transition-colors"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
     </div>
   );
 
@@ -250,20 +128,6 @@ const RenderDashboard = ({ addNotification }) => {
             icon={Sun}
             color="orange"
           />
-          {/* <MetricCard
-            title="Radio Scale"
-            value={`R${currentMetrics.rScale}`}
-            unit=""
-            icon={Radio}
-            color="purple"
-          /> */}
-          {/* <MetricCard
-            title="Geomag Scale"
-            value={`G${currentMetrics.gScale}`}
-            unit=""
-            icon={Shield}
-            color="red"
-          /> */}
         </div>
       </div>
 
