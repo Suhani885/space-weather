@@ -38,7 +38,7 @@ const MetricCard = ({
       });
 
       const response = await fetch(
-        `https://contributor-trends-fluid-nurses.trycloudflare.com/story?${queryParams}`,
+        `https://happy-suggestion-sanyo-usb.trycloudflare.com/story?${queryParams}`,
         {
           method: "GET",
           headers: {
@@ -53,7 +53,7 @@ const MetricCard = ({
 
       let audioUrl = data.audio_url;
       if (audioUrl && !audioUrl.startsWith("http")) {
-        audioUrl = `https://contributor-trends-fluid-nurses.trycloudflare.com${audioUrl}`;
+        audioUrl = `https://happy-suggestion-sanyo-usb.trycloudflare.com${audioUrl}`;
       }
 
       setStoryData({

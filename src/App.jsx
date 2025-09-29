@@ -210,7 +210,7 @@ const RegistrationModal = ({ isOpen, onClose, onRegister }) => {
 
     try {
       const response = await fetch(
-        "https://contributor-trends-fluid-nurses.trycloudflare.com/api/subscribe/",
+        "https://happy-suggestion-sanyo-usb.trycloudflare.com/api/subscribe/",
         {
           method: "POST",
           headers: {
@@ -458,21 +458,26 @@ const App = () => {
         <div className="orbital-rings"></div>
       </div>
 
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 pointer-events-none z-0">
+        <div className="scale-150">
+          <Earth3D />
+        </div>
+      </div>
+
       <div className="relative z-10">
-        {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center px-6">
           <div className="max-w-7xl mx-auto w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-              <div className="text-left space-y-8">
+            <div className="flex flex-col items-center text-center space-y-12">
+              <div className="space-y-8 relative z-20">
                 <div className="space-y-6">
-                  <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tight">
+                  <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tight pt-14">
                     <span className="block bg-gradient-to-r from-white via-cyan-100 to-blue-200 bg-clip-text text-transparent drop-shadow-2xl">
                       Space Weather
                     </span>
                     <span className="block text-white mt-2">Monitor</span>
                   </h1>
 
-                  <p className="text-xl md:text-2xl text-gray-300 max-w-2xl leading-relaxed font-light">
+                  <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light">
                     Advanced real-time monitoring platform delivering critical
                     space environment intelligence for
                     <span className="text-cyan-300 font-medium">
@@ -493,7 +498,7 @@ const App = () => {
                   </p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-6 pt-4">
+                <div className="flex flex-col sm:flex-row gap-6 pt-4 justify-center">
                   <button
                     onClick={() => setActiveTab("dashboard")}
                     className="group relative bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 hover:from-blue-700 hover:via-cyan-700 hover:to-blue-800 text-white font-semibold py-5 px-12 rounded-2xl transition-all duration-500 flex items-center justify-center shadow-2xl shadow-blue-500/25 hover:shadow-cyan-500/40 transform hover:scale-105 overflow-hidden"
@@ -514,144 +519,133 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center space-y-12">
-                {/* <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl scale-150 animate-pulse"></div>
-                  <div className="relative z-10 p-8 bg-black/20 backdrop-blur-xl rounded-3xl border border-gray-700/30">
-                    <Earth3D />
+              <div className="w-full max-w-5xl relative z-20">
+                <div className="bg-gradient-to-br from-black/60 via-gray-900/40 to-black/60 backdrop-blur-2xl border border-gray-700/30 rounded-3xl p-8 shadow-2xl">
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-white font-semibold text-lg">
+                        Live Telemetry
+                      </span>
+                    </div>
+                    <div className="text-xs text-gray-400 font-mono bg-gray-800/50 px-3 py-1 rounded-full">
+                      UTC{" "}
+                      {new Date().toLocaleTimeString("en-US", {
+                        hour12: false,
+                      })}
+                    </div>
                   </div>
-                </div> */}
 
-                <div className="w-full max-w-3xl">
-                  <div className="bg-gradient-to-br from-black/60 via-gray-900/40 to-black/60 backdrop-blur-2xl border border-gray-700/30 rounded-3xl p-8 shadow-2xl">
-                    <div className="flex items-center justify-between mb-8">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                        <span className="text-white font-semibold text-lg">
-                          Live Telemetry
-                        </span>
-                      </div>
-                      <div className="text-xs text-gray-400 font-mono bg-gray-800/50 px-3 py-1 rounded-full">
-                        UTC{" "}
-                        {new Date().toLocaleTimeString("en-US", {
-                          hour12: false,
-                        })}
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                      <div className="group bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/40 hover:border-blue-500/40 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-105">
-                        <div className="flex items-center justify-between mb-4">
-                          <Activity className="w-8 h-8 text-blue-400 group-hover:scale-110 transition-transform" />
-                          <div
-                            className={`w-2 h-2 rounded-full ${
-                              currentMetrics.kpIndex > 5
-                                ? "bg-red-400 animate-pulse"
-                                : currentMetrics.kpIndex > 3
-                                ? "bg-yellow-400"
-                                : "bg-green-400"
-                            }`}
-                          ></div>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
-                            Kp Index
-                          </div>
-                          <div
-                            className={`text-4xl font-bold ${
-                              currentMetrics.kpIndex > 5
-                                ? "text-red-400"
-                                : currentMetrics.kpIndex > 3
-                                ? "text-yellow-400"
-                                : "text-green-400"
-                            }`}
-                          >
-                            {currentMetrics.kpIndex.toFixed(1)}
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            {currentMetrics.kpIndex > 5
-                              ? "Storm Active"
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="group bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/40 hover:border-blue-500/40 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-105">
+                      <div className="flex items-center justify-between mb-4">
+                        <Activity className="w-8 h-8 text-blue-400 group-hover:scale-110 transition-transform" />
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            currentMetrics.kpIndex > 5
+                              ? "bg-red-400 animate-pulse"
                               : currentMetrics.kpIndex > 3
-                              ? "Disturbed"
-                              : "Quiet"}
-                          </div>
-                        </div>
+                              ? "bg-yellow-400"
+                              : "bg-green-400"
+                          }`}
+                        ></div>
                       </div>
-
-                      <div className="group bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/40 hover:border-cyan-500/40 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-105">
-                        <div className="flex items-center justify-between mb-4">
-                          <Zap className="w-8 h-8 text-cyan-400 group-hover:scale-110 transition-transform" />
-                          <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
+                          Kp Index
                         </div>
-                        <div className="space-y-2">
-                          <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
-                            Solar Wind
-                          </div>
-                          <div className="text-4xl font-bold text-cyan-400">
-                            {Math.round(currentMetrics.solarWindSpeed)}
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            km/s velocity
-                          </div>
+                        <div
+                          className={`text-4xl font-bold ${
+                            currentMetrics.kpIndex > 5
+                              ? "text-red-400"
+                              : currentMetrics.kpIndex > 3
+                              ? "text-yellow-400"
+                              : "text-green-400"
+                          }`}
+                        >
+                          {currentMetrics.kpIndex.toFixed(1)}
                         </div>
-                      </div>
-
-                      <div className="group bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/40 hover:border-orange-500/40 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-105">
-                        <div className="flex items-center justify-between mb-4">
-                          <Globe className="w-8 h-8 text-orange-400 group-hover:scale-110 transition-transform" />
-                          <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
-                            Solar Flares
-                          </div>
-                          <div className="text-4xl font-bold text-orange-400">
-                            {currentMetrics.flareClass}
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            X-Ray Class
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="group bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/40 hover:border-red-500/40 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-105">
-                        <div className="flex items-center justify-between mb-4">
-                          <Radio className="w-8 h-8 text-red-400 group-hover:scale-110 transition-transform" />
-                          <div
-                            className={`w-2 h-2 rounded-full ${
-                              currentMetrics.rScale > 2
-                                ? "bg-red-400 animate-pulse"
-                                : currentMetrics.rScale > 0
-                                ? "bg-yellow-400"
-                                : "bg-green-400"
-                            }`}
-                          ></div>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
-                            Radio Impact
-                          </div>
-                          <div
-                            className={`text-4xl font-bold ${
-                              currentMetrics.rScale > 2
-                                ? "text-red-400"
-                                : currentMetrics.rScale > 0
-                                ? "text-yellow-400"
-                                : "text-green-400"
-                            }`}
-                          >
-                            R{currentMetrics.rScale}
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            Blackout Scale
-                          </div>
+                        <div className="text-xs text-gray-500">
+                          {currentMetrics.kpIndex > 5
+                            ? "Storm Active"
+                            : currentMetrics.kpIndex > 3
+                            ? "Disturbed"
+                            : "Quiet"}
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-8 pt-6 border-t border-gray-700/30">
-                      <div className="flex items-center justify-between"></div>
+                    <div className="group bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/40 hover:border-cyan-500/40 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-105">
+                      <div className="flex items-center justify-between mb-4">
+                        <Zap className="w-8 h-8 text-cyan-400 group-hover:scale-110 transition-transform" />
+                        <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
+                          Solar Wind
+                        </div>
+                        <div className="text-4xl font-bold text-cyan-400">
+                          {Math.round(currentMetrics.solarWindSpeed)}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          km/s velocity
+                        </div>
+                      </div>
                     </div>
+
+                    <div className="group bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/40 hover:border-orange-500/40 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-105">
+                      <div className="flex items-center justify-between mb-4">
+                        <Globe className="w-8 h-8 text-orange-400 group-hover:scale-110 transition-transform" />
+                        <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
+                          Solar Flares
+                        </div>
+                        <div className="text-4xl font-bold text-orange-400">
+                          {currentMetrics.flareClass}
+                        </div>
+                        <div className="text-xs text-gray-500">X-Ray Class</div>
+                      </div>
+                    </div>
+
+                    <div className="group bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/40 hover:border-red-500/40 rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-105">
+                      <div className="flex items-center justify-between mb-4">
+                        <Radio className="w-8 h-8 text-red-400 group-hover:scale-110 transition-transform" />
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            currentMetrics.rScale > 2
+                              ? "bg-red-400 animate-pulse"
+                              : currentMetrics.rScale > 0
+                              ? "bg-yellow-400"
+                              : "bg-green-400"
+                          }`}
+                        ></div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
+                          Radio Impact
+                        </div>
+                        <div
+                          className={`text-4xl font-bold ${
+                            currentMetrics.rScale > 2
+                              ? "text-red-400"
+                              : currentMetrics.rScale > 0
+                              ? "text-yellow-400"
+                              : "text-green-400"
+                          }`}
+                        >
+                          R{currentMetrics.rScale}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          Blackout Scale
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-gray-700/30">
+                    <div className="flex items-center justify-between"></div>
                   </div>
                 </div>
               </div>
@@ -959,7 +953,7 @@ const App = () => {
   );
 
   return (
-    <div className="min-h-screen bg-black text-white relative">
+    <div className="min-h-screen bg-black relative overflow-hidden">
       <header className="bg-gradient-to-r from-gray-900/95 via-black/95 to-gray-900/95 backdrop-blur-xl border-b border-cyan-500/20 sticky top-0 z-50 shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-900/10 via-transparent to-blue-900/10" />
 
